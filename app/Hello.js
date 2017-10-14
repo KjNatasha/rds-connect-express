@@ -28,7 +28,7 @@ class Hello extends React.Component {
 		});
 	}
 	render() {
-		let mans = this.state.btc_idr.map( (btc_idr) => {
+		let btc_idr = this.state.btc_idr.map( (btc_idr) => {
 			return <Total
 					totalSell={btc_idr.totalSell}
 					totalBuy={btc_idr.totalBuy}
@@ -39,7 +39,7 @@ class Hello extends React.Component {
 			<div>
 				<h1>CalyFactory Developers</h1>
 				<ul>
-				{mans}
+				{btc_idr}
 				</ul>
 			</div>
 		);
