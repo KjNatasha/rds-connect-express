@@ -17,13 +17,15 @@ app.use(bodyParser.json());
 app.get('/btc_idr', (req, res) =>{
 	connection.query("select sum(amount*price) as totalSell from btc_idr where type=\"sell\"", (err, totalSell) => {
         if(err) throw err;
-		let btc_idr = Object.assign({},totalSell)
+		let btc_idr = []
+		btc_idr += totalSell
 		console.log(totalSell);
 
 		connection.query("select sum(amount*price) as totalBuy from btc_idr where type=\"buy\"", (err, totalBuy) => {
             if(err) throw err;
-			Object.assign(btc_idr, totalBuy)
-			console.log(totalBuy)
+			btc_idr += totalBuy
+            console.log(totalBuy)
+
 		});
 		console.log(btc_idr);
 		res.send(btc_idr);
