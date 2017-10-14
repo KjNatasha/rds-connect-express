@@ -30,7 +30,8 @@ class Hello extends React.Component {
 	render() {
 		let mans = this.state.btc_idr.map( (btc_idr) => {
 			return <Total
-					totalsell={btc_idr.totalsell}
+					totalSell={btc_idr.totalSell}
+					totalBuy={btc_idr.totalBuy}
 					{...btc_idr}/>
 		});
 
@@ -49,9 +50,14 @@ class Hello extends React.Component {
 class Total extends React.Component {
 	render() {
 		return (
+			<div>
 			<li>
-				{this.props.totalsell}
+				{`totalSell: ${this.props.totalSell}`}
 			</li>
+			<li>
+				{`'totalBuy: ${this.props.totalBuy}`}
+			</li>
+			</div>
 		);
 	}
 }

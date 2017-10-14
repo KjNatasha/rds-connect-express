@@ -15,10 +15,16 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.get('/btc_idr', (req, res) =>{
-	connection.query("select sum(amount*price) as totalsell from btc_idr where type=\"sell\"", (err, totalsell) => {
+	connection.query("select sum(amount*price) as totalsell from btc_idr where type=\"sell\"", (err, totalSell) => {
+		let btc_idr = Object.assign({},totalSell)
 		if(err) throw err;
-		console.log(typeof(totalsell));
-		res.send(totalsell);
+		connection.query("select sum(amount*price) as totalbuy from btc_idr where type=\"buy\"", (err, totalBuy) => {
+			btc_idr = Object.assign(btc_idr, totalBuy)
+			if(err) throw err;
+
+		});
+		console.log(btc_idr);
+		res.send(btc_idr);
 	});
 });
 const server = app.listen(port, () => {
