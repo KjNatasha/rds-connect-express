@@ -18334,7 +18334,7 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-		value: true
+	    value: true
 	});
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -18357,98 +18357,100 @@
 
 	// Parent Component
 	var Hello = function (_React$Component) {
-		_inherits(Hello, _React$Component);
+	    _inherits(Hello, _React$Component);
 
-		function Hello() {
-			_classCallCheck(this, Hello);
+	    function Hello() {
+	        _classCallCheck(this, Hello);
 
-			var _this = _possibleConstructorReturn(this, (Hello.__proto__ || Object.getPrototypeOf(Hello)).apply(this, arguments));
+	        var _this = _possibleConstructorReturn(this, (Hello.__proto__ || Object.getPrototypeOf(Hello)).apply(this, arguments));
 
-			_this.state = {
-				mans: []
-			};
-			return _this;
-		}
+	        _this.state = {
+	            btc_idr: {}
+	        };
+	        return _this;
+	    }
 
-		_createClass(Hello, [{
-			key: 'componentDidMount',
-			value: function componentDidMount() {
-				var _this2 = this;
+	    _createClass(Hello, [{
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            var _this2 = this;
 
-				fetch('/man', {
-					method: 'get',
-					dataType: 'json',
-					headers: {
-						'Accept': 'application/json',
-						'Content-Type': 'application/json'
-					}
-				}).then(function (response) {
-					return response.json();
-				}).then(function (responseData) {
-					_this2.setState({ mans: responseData });
-				}).catch(function (error) {
-					console.log('Error fetching man', error);
-				});
-			}
-		}, {
-			key: 'render',
-			value: function render() {
-				var mans = this.state.mans.map(function (man) {
-					return _react2.default.createElement(Guy, _extends({
-						name: man.name,
-						age: man.age,
-						createDateTime: man.create_datetime
-					}, man));
-				});
+	            fetch('/btc_idr', {
+	                method: 'get',
+	                dataType: 'json',
+	                headers: {
+	                    'Accept': 'application/json',
+	                    'Content-Type': 'application/json'
+	                }
+	            }).then(function (response) {
+	                return response.json();
+	            }).then(function (responseData) {
+	                _this2.setState({ btc_idr: responseData });
+	            }).catch(function (error) {
+	                console.log('Error fetching btc_idr', error);
+	            });
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var btc_idr = _react2.default.createElement(Total, _extends({
+	                totalSell: this.state.btc_idr.totalSell,
+	                totalBuy: this.state.btc_idr.totalBuy
+	            }, btc_idr));
 
-				return _react2.default.createElement(
-					'div',
-					null,
-					_react2.default.createElement(
-						'h1',
-						null,
-						'CalyFactory Developers'
-					),
-					_react2.default.createElement(
-						'ul',
-						null,
-						mans
-					)
-				);
-			}
-		}]);
+	            return _react2.default.createElement(
+	                'div',
+	                null,
+	                _react2.default.createElement(
+	                    'h1',
+	                    null,
+	                    'CalyFactory Developers'
+	                ),
+	                _react2.default.createElement(
+	                    'ul',
+	                    null,
+	                    btc_idr
+	                )
+	            );
+	        }
+	    }]);
 
-		return Hello;
+	    return Hello;
 	}(_react2.default.Component);
 
 	// Child Component
 
 
-	var Guy = function (_React$Component2) {
-		_inherits(Guy, _React$Component2);
+	var Total = function (_React$Component2) {
+	    _inherits(Total, _React$Component2);
 
-		function Guy() {
-			_classCallCheck(this, Guy);
+	    function Total() {
+	        _classCallCheck(this, Total);
 
-			return _possibleConstructorReturn(this, (Guy.__proto__ || Object.getPrototypeOf(Guy)).apply(this, arguments));
-		}
+	        return _possibleConstructorReturn(this, (Total.__proto__ || Object.getPrototypeOf(Total)).apply(this, arguments));
+	    }
 
-		_createClass(Guy, [{
-			key: 'render',
-			value: function render() {
-				return _react2.default.createElement(
-					'li',
-					null,
-					this.props.name,
-					', age is ',
-					this.props.age,
-					'. create time : ',
-					this.props.createDateTime
-				);
-			}
-		}]);
+	    _createClass(Total, [{
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'div',
+	                null,
+	                _react2.default.createElement(
+	                    'li',
+	                    null,
+	                    'totalSell: ' + this.props.totalSell
+	                ),
+	                _react2.default.createElement(
+	                    'li',
+	                    null,
+	                    '\'totalBuy: ' + this.props.totalBuy
+	                )
+	            );
+	        }
+	    }]);
 
-		return Guy;
+	    return Total;
 	}(_react2.default.Component);
 
 	exports.default = Hello;

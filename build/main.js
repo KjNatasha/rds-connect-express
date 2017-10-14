@@ -28,11 +28,12 @@ app.use('/', _express2.default.static(__dirname + "/../public"));
 app.use(_bodyParser2.default.urlencoded({ extended: true }));
 app.use(_bodyParser2.default.json());
 
-app.get('/man', function (req, res) {
-	connection.query("SELECT * FROM btc_idr", function (err, rows) {
+app.get('/btc_idr', function (req, res) {
+	connection.query("select sum(amount*price) as totalSell from btc_idr where type=\"sell\" ; select sum(amount*price) as totalBuy from btc_idr where type=\"buy\"", function (err, result) {
 		if (err) throw err;
-		console.log(rows);
-		res.send(rows);
+		console.log(result);
+		var btc_idr = Object.assign({}, result[0][0], result[1][0]);
+		res.send(btc_idr);
 	});
 });
 var server = app.listen(port, function () {

@@ -54,7 +54,7 @@ class Total extends React.Component {
                     {`totalSell: ${this.props.totalSell}`}
 				</li>
 				<li>
-                    {`'totalBuy: ${this.props.totalBuy}`}
+                    {`totalBuy: ${this.props.totalBuy}`}
 				</li>
 			</div>
         );
