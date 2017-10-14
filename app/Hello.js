@@ -6,12 +6,12 @@ class Hello extends React.Component {
 	constructor(){
 		super(...arguments);
 		this.state = {
-			mans:[]
+			btc_idr:[]
 		};
 	}
 
 	componentDidMount(){
-		fetch('/man',{
+		fetch('/btc_idr',{
 			method: 'get',
 			dataType: 'json',
 			headers:{
@@ -21,19 +21,17 @@ class Hello extends React.Component {
 		})
 		.then((response) => response.json())
 		.then((responseData) => {
-			this.setState({mans: responseData});
+			this.setState({btc_idr: responseData});
 		})
 		.catch((error)=>{
-			console.log('Error fetching man',error);
+			console.log('Error fetching btc_idr',error);
 		});
 	}
 	render() {
-		let mans = this.state.mans.map( (man) => {
-			return <Guy
-					name={man.name}
-					age={man.age}
-					createDateTime={man.create_datetime}
-					{...man}/>
+		let mans = this.state.btc_idr.map( (btc_idr) => {
+			return <Total
+					totalsell={btc_idr.totalsell}
+					{...btc_idr}/>
 		});
 
 		return (
@@ -48,11 +46,11 @@ class Hello extends React.Component {
 }
 
 // Child Component
-class Guy extends React.Component {
+class Total extends React.Component {
 	render() {
 		return (
 			<li>
-				{this.props.name}, age is {this.props.age}. create time : {this.props.createDateTime}
+				{this.props.totalsell}
 			</li>
 		);
 	}

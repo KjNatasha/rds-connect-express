@@ -14,13 +14,14 @@ app.use('/', express.static(__dirname + "/../public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.get('/man', (req, res) =>{
-	connection.query("SELECT * FROM btc_idr", (err, rows) => {
+app.get('/btc_idr', (req, res) =>{
+	connection.query("select sum(amount*price) as totalsell from btc_idr where type=\"sell\"", (err, totalsell) => {
 		if(err) throw err;
-		console.log(rows);
-		res.send(rows);
+		console.log(typeof(totalsell));
+		res.send(totalsell);
 	});
 });
 const server = app.listen(port, () => {
 	console.log('Express listening on port', port);
 });
+
